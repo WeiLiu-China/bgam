@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pams上的小应用</title>
+    <script src="frame/jq.js"></script>
+    <link rel="stylesheet"
+          href="frame/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet"
+          href="frame/bootstrap.last.css">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="frame/bootstrap.last.js"></script>
+    <script>
+        //地区列表
+        var regionList = new Array();
+        //地区ID
+        var regionId;
+        //应用列表
+        var applyList = new Array();
+        //应用NAME
+        var applyId;
+        //新增/删除
+        var type;
+        var personIdNos;
+
+        function
+        pageLoad() {
+            $.ajax("/bgam/sbma-regionalism/getRegionList",
+                {
+                    dataType: "json", // 预期服务器返回的数据类型。
+                    type: "post", //  请求方式 POST或GET
+                    contentType: "application/json", //  发送信息至服务器时的内容编码类型
+                    // 发送到服务器的数据。
+                    data: JSON.stringify({}),
+                    async: true, // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
+                    // 请求成功后的回调函数。
+                    success: function (data) {
+                        console.log(data);
+                        $(function () {
+                            if (data.flag == 0) {
+                                alert(data.message);
+                            } else {
+                                if (data.result.length == 0) {
+                                    alert("地区列表无数据");
+                                } else {
+                                    regionList = data.result;
+                                    var htmlInfo = "";
+                                    for (var i = 0; i < data.result.length; i++) {
+                                        htmlInfo +=
+                                            "<li><a href=\"#\" onclick=\"chooseBtnOnclick(1," + "'" + data.result[i].code +
+                                            "')\">" +
+                                            data.result[i].name + "</a></li>";
+                                    }
+                                    console.log(htmlInfo)
+                                    $("#regionList").html(htmlInfo);
+                                }
+                            }
+                        });
+                    },
+                    // 请求出错时调用的函数
+                    error: function () {
+                        alert("获取地区列表失败");
+                    }
+                });
+
+        }
+
+        function btnOnclick() {
+            personIdNos = $("#cfzh-content").val();
+            if (type == null) {
+                type = 1;
+            }
+            if (regionId == null) {
+                alert("请选择地区");
+            } else if (applyId == null) {
+                alert("请选择应用");
+            } else if (personIdNos == null) {
+                alert("请输入人员身份证号");
+            } else {
+                $.ajax(" /bgam/admin/power/authPower",
+                    {
+                        dataType: "json", // 预期服务器返回的数据类型。
+                        type: "post", //  请求方式 POST或GET
+                        contentType: "application/json", //  发送信息至服务器时的内容编码类型
+                        // 发送到服务器的数据
+                        data: JSON.stringify({
+                            appId: applyId,
+                            appRegionalismCode: regionId,
+                            personIdNos: personIdNos,
+                            type: type
+                        }),
+                        async: true, // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
+                        // 请求成功后的回调函数。
+                        success: function (data) {
+                            console.log(data);
+                            $(function () {
+                                if (data.flag == 0) {
+                                    alert("添加失败!" + data.message);
+                                }
+                                if (data.flag == 1) {
+                                    if (data.result === null || data.result.length == 0) {
+                                        alert("操作成功！");
+                                    } else {
+                                        var rtMessage = "部分成功！";
+                                        var wrongData = "无效的身份证号码为:";
+                                        wrongData += data.result[0];
+                                        for (var i = 1; i < data.result.length; i++) {
+                                            wrongData += ',' + data.result[i]
+                                        }
+                                        rtMessage += wrongData;
+                                        alert(rtMessage);
+                                        $("#cfzh-content").val(wrongData);
+                                    }
+                                }
+                            });
+                        },
+                        // 请求出错时调用的函数
+                        error: function () {
+                            alert("获取地区列表失败");
+                        }
+                    });
+            }
+        }
+
+        function chooseBtnOnclick(type, id) {
+            if (type == 1) {
+                regionId = id;
+                applyId = null;
+                var content = "";
+                for (var i = 0; i < regionList.length; i++) {
+                    if (id == regionList[i].code) {
+                        content = regionList[i].name;
+                    }
+                }
+                $("#chooseRegion").html(content);
+                $.ajax("/bgam/sbma-regionalism/getApplyList",
+                    {
+                        dataType: "json", // 预期服务器返回的数据类型。
+                        type: "post", //  请求方式 POST或GET
+                        contentType: "application/json", //  发送信息至服务器时的内容编码类型
+                        // 发送到服务器的数据。
+                        data: JSON.stringify({code: id}),
+                        async: true, // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
+                        // 请求成功后的回调函数。
+                        success: function (data) {
+                            console.log(data);
+                            $(function () {
+                                if (data.flag == 0) {
+                                    alert(data.message);
+                                } else {
+                                    if (data.result.length == 0) {
+                                        $("#chooseApply").html("无数据");
+                                        var htmlInfo = "";
+                                        htmlInfo +=
+                                            "<li><a href=\"#\">无数据</a></li>";
+                                        $("#applyList").html(htmlInfo);
+                                    } else {
+                                        $("#chooseApply").html("请选择");
+                                        applyList = data.result;
+                                        var htmlInfo = "";
+                                        for (var i = 0; i < data.result.length; i++) {
+                                            htmlInfo +=
+                                                "<li><a href=\"#\" onclick=\"chooseBtnOnclick(2," + "'" +
+                                                data.result[i].appId +
+                                                "')\">" +
+                                                data.result[i].appName + "</a></li>";
+                                        }
+                                        console.log(htmlInfo);
+                                        $("#applyList").html(htmlInfo);
+                                    }
+                                }
+                            });
+                        },
+                        // 请求出错时调用的函数
+                        error: function () {
+                            alert("获取应用列表失败");
+                        }
+                    });
+            }
+            if (type = 2&&id!=regionId) {
+                applyId = id;
+                var content = "";
+                for (var i = 0; i < applyList.length; i++) {
+                    if (id == applyList[i].appId) {
+                        content = applyList[i].appName;
+                    }
+                    $("#chooseApply").html(content);
+                }
+            }
+        }
+    </script>
+</head>
+<body onLoad="pageLoad()">
+<div class="htmleaf-container">
+    <input class="bg-image" type="image" src="images/009.jpg"
+           style="width: 100%; height: 100%"/>
+    <header class="htmleaf-header">
+        <h1 style="color: white; padding-top: 1.5%; padding-bottom: 6%">小应用</h1>
+        <span class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+                <sapn id="chooseRegion">请选择地区</sapn>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="regionList">
+                <li><a href="#">无数据</a></li>
+            </ul>
+        </span>
+        <span class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+               <sapn id="chooseApply">请选择应用</sapn>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="applyList">
+                <li><a href="#" onclick="chooseBtnOnclick(2,1)">请先选择地区</a></li>
+            </ul>
+        </span>
+    </header>
+    <div class="demo form-bg" style="padding: 20px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="form-horizontal">
+                        <span class="heading">提交内容</span>
+                        <div class="form-group">
+                            <div class="form-group help">
+                                <textarea type="textarea" class="form-control" id="cfzh-content"
+                                          name="subject" placeholder="请复制身份证号到这里,多个,隔开"></textarea>
+                                <i class="fa fa-lock"></i>
+                                <a href="#" class="fa fa-question-circle"></a>
+                                <div class="main-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="check"
+                                           checked="checked" onclick="checkBox(1)"/> <label
+                                        for="checkbox1"></label>
+                                </div>
+                                <span class="text">添加&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <div class="main-checkbox">
+                                    <input type="checkbox" id="checkbox2" name="check" onclick="checkBox(2)"
+                                    /> <label for="checkbox2"></label>
+                                </div>
+                                <span class="text">删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-default"
+                                onClick="btnOnclick()">提交
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #cfzh-content {
+        height: 400px;
+        font-size: 17px;
+    }
+
+    #cfzh-content::-webkit-input-placeholder {
+        height: 400px;
+        line-height: 400px;
+    }
+
+    /* 使用webkit内核的浏览器 */
+    #cfzh-content:-moz-placeholder {
+        height: 400px;
+        line-height: 400px;
+    }
+
+    /* Firefox版本4-18 */
+    #cfzh-content::-moz-placeholder {
+        height: 400px;
+        line-height: 400px;
+    }
+
+    /* Firefox版本19+ */
+    #cfzh-content:-ms-input-placeholder {
+        height: 400px;
+        line-height: 400px;
+    }
+
+    .container {
+        width: 90% !important;
+        height: 100% !important;
+    }
+
+    .identif {
+        display: none;
+    }
+
+    .form-bg {
+        /* background: #00b4ef;*/
+
+    }
+
+    .form-horizontal {
+        background: #fff;
+        padding-bottom: 40px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .form-horizontal .heading {
+        display: block;
+        font-size: 35px;
+        font-weight: 700;
+        padding: 35px 0;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 30px;
+    }
+
+    .form-horizontal .form-group {
+        padding: 0 40px;
+        margin: 0 0 25px 0;
+        position: relative;
+    }
+
+    .form-horizontal .form-control {
+        background: #f0f0f0;
+        border: none;
+        border-radius: 20px;
+        box-shadow: none;
+        padding: 0 20px 0 45px;
+        height: 400px;
+        transition: all 0.3s ease 0s;
+    }
+
+    .btn-secondary {
+        width: 10%;
+    }
+
+    .form-horizontal .form-control:focus {
+        background: #e0e0e0;
+        box-shadow: none;
+        outline: 0 none;
+    }
+
+    .form-horizontal .form-group i {
+        position: absolute;
+        top: 12px;
+        left: 60px;
+        font-size: 17px;
+        color: #c8c8c8;
+        transition: all 0.5s ease 0s;
+    }
+
+    .form-horizontal .form-control:focus + i {
+        color: #00b4ef;
+    }
+
+    .form-horizontal .fa-question-circle {
+        display: inline-block;
+        position: absolute;
+        top: 12px;
+        right: 60px;
+        font-size: 20px;
+        color: #808080;
+        transition: all 0.5s ease 0s;
+    }
+
+    .form-horizontal .fa-question-circle:hover {
+        color: #000;
+    }
+
+    .form-horizontal .main-checkbox {
+        float: left;
+        width: 20px;
+        height: 20px;
+        background: #11a3fc;
+        border-radius: 50%;
+        position: relative;
+        margin: 5px 0 0 5px;
+        border: 1px solid #11a3fc;
+    }
+
+    .form-horizontal .main-checkbox label {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+    }
+
+    .form-horizontal .main-checkbox label:after {
+        content: "";
+        width: 10px;
+        height: 5px;
+        position: absolute;
+        top: 5px;
+        left: 4px;
+        border: 3px solid #fff;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        opacity: 0;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    .form-horizontal .main-checkbox input[type=checkbox] {
+        visibility: hidden;
+    }
+
+    .form-horizontal .main-checkbox input[type=checkbox]:checked + label:after {
+        opacity: 1;
+    }
+
+    .form-horizontal .text {
+        float: left;
+        margin-left: 7px;
+        /*line-height: 400px;*/
+        padding-top: 5px;
+        text-transform: capitalize;
+    }
+
+    /*.row{
+        height: 600px;
+    }*/
+    .form-horizontal .btn {
+        float: right;
+        font-size: 14px;
+        color: #fff;
+        background: #00b4ef;
+        border-radius: 30px;
+        padding: 10px 25px;
+        border: none;
+        text-transform: capitalize;
+        transition: all 0.5s ease 0s;
+    }
+
+    @media only screen and (max-width: 479px) {
+        .form-horizontal .form-group {
+            padding: 0 25px;
+        }
+
+        .form-horizontal .form-group i {
+            left: 45px;
+        }
+
+        .form-horizontal .btn {
+            padding: 10px 20px;
+        }
+    }
+
+    .bg-image {
+        position: absolute;
+        z-index: -1;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 4.5%;
+        color: black;
+    }
+
+    #lw {
+        color: black;
+    }
+
+    #dropdownMenu2 {
+        margin-left: 1%;
+    }
+</style>
+<script>
+    function checkBox(checkBoxType) {
+        if (checkBoxType == 1) {
+            var bol = $("#checkbox1").is(":checked");
+            //debugger;
+            if (!bol) {
+                $('#checkbox1').prop("checked", true);
+                $('#checkbox2').prop("checked", false);
+                type = 1;
+            } else {
+                $('#checkbox1').prop("checked", true);
+                $('#checkbox2').prop("checked", false);
+                type = 1;
+            }
+        }
+        if (checkBoxType == 2) {
+            var bol = $("#checkbox2").is(":checked");
+            if (!bol) {
+                $('#checkbox2').prop("checked", true);
+                $('#checkbox1').prop("checked", false);
+                type = 2;
+            } else {
+                $('#checkbox2').prop("checked", true);
+                $('#checkbox1').prop("checked", false);
+                type = 2;
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
