@@ -1,18 +1,16 @@
 package com.xdja.admin.mapper;
 
-import com.xdja.admin.entity.Person;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.xdja.admin.entity.Person;
 
 /**
  * <p>
- * 人员信息表 Mapper 接口
+ *  Mapper 接口
  * </p>
  *
- * @author lw
- * @since 2020-04-09
+ * @author liuwei
+ * @since 2020-04-23
  */
-@Mapper
 public interface PersonMapper extends BaseMapper<Person> {
 
 }

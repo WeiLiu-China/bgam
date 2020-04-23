@@ -5,11 +5,11 @@ import com.xdja.admin.entity.Person;
 
 /**
  * <p>
- * 人员信息表 服务类
+ *  服务类
  * </p>
  *
- * @author lw
- * @since 2020-04-09
+ * @author liuwei
+ * @since 2020-04-23
  */
 public interface PersonService extends IService<Person> {
 
