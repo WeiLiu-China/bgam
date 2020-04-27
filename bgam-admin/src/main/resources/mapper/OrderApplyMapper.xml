@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.admin.mapper.OrderApplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.admin.entity.OrderApply">
+        <result column="C_ID" property="id" />
+        <result column="C_ASSAIATION_ID" property="assaiationId" />
+        <result column="C_APPLY_TIME" property="applyTime" />
+        <result column="C_APPROVE_TIME" property="approveTime" />
+        <result column="C_CRETOR_ID" property="cretorId" />
+        <result column="C_RESOURCE_ID" property="resourceId" />
+        <result column="N_START_TIMESTAMP" property="startTimestamp" />
+        <result column="N_END_TIMESTAMP" property="endTimestamp" />
+        <result column="N_STATE" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_ASSAIATION_ID, C_APPLY_TIME, C_APPROVE_TIME, C_CRETOR_ID, C_RESOURCE_ID, N_START_TIMESTAMP, N_END_TIMESTAMP, N_STATE
+    </sql>
+
+</mapper>

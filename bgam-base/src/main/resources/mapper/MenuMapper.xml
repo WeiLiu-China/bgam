@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.base.mapper.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.base.entity.Menu">
+        <result column="C_ID" property="id" />
+        <result column="C_NAME" property="name" />
+        <result column="C_CODE" property="code" />
+        <result column="C_PARENT_ID" property="parentId" />
+        <result column="C_ORDER_NUM" property="orderNum" />
+        <result column="C_ICON" property="icon" />
+        <result column="C_TYPE" property="type" />
+        <result column="C_URL" property="url" />
+        <result column="N_BE_USED" property="beUsed" />
+        <result column="N_CAN_EDIT" property="canEdit" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_NAME, C_CODE, C_PARENT_ID, C_ORDER_NUM, C_ICON, C_TYPE, C_URL, N_BE_USED, N_CAN_EDIT
+    </sql>
+
+</mapper>

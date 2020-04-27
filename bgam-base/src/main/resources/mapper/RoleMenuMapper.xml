@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.base.mapper.RoleMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.base.entity.RoleMenu">
+        <result column="C_ID" property="id" />
+        <result column="C_ROLE_ID" property="roleId" />
+        <result column="C_MENU_ID" property="menuId" />
+        <result column="N_CAN_EDIT" property="canEdit" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_ROLE_ID, C_MENU_ID, N_CAN_EDIT
+    </sql>
+
+</mapper>

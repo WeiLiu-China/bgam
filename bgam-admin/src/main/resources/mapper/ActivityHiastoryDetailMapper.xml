@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.admin.mapper.ActivityHiastoryDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.admin.entity.ActivityHiastoryDetail">
+        <result column="C_ID" property="id" />
+        <result column="C_ACTIVITY_HIASTORY_ID" property="activityHiastoryId" />
+        <result column="C_PERSON_ID" property="personId" />
+        <result column="N_STATE" property="state" />
+        <result column="N_START_TIMESTAMP" property="startTimestamp" />
+        <result column="N_END_TIMESTAMP" property="endTimestamp" />
+        <result column="C_LNG_LAT" property="lngLat" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_ACTIVITY_HIASTORY_ID, C_PERSON_ID, N_STATE, N_START_TIMESTAMP, N_END_TIMESTAMP, C_LNG_LAT
+    </sql>
+
+</mapper>

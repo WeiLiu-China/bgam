@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.admin.mapper.ForeverApplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.admin.entity.ForeverApply">
+        <result column="C_ID" property="id" />
+        <result column="C_APPLY_ID" property="applyId" />
+        <result column="C_UNIT" property="unit" />
+        <result column="N_IS_FOREVER" property="isForever" />
+        <result column="C_FRECUCY" property="frecucy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_APPLY_ID, C_UNIT, N_IS_FOREVER, C_FRECUCY
+    </sql>
+
+</mapper>

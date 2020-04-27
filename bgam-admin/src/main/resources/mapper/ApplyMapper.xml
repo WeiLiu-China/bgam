@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.admin.mapper.ApplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.admin.entity.Apply">
+        <result column="C_ID" property="id" />
+        <result column="C_ASSAIATION_ID" property="assaiationId" />
+        <result column="C_APPLY_TIME" property="applyTime" />
+        <result column="C_APPROVE_TIME" property="approveTime" />
+        <result column="N_STATE" property="state" />
+        <result column="C_CRETOR_ID" property="cretorId" />
+        <result column="C_RESOURCE_ID" property="resourceId" />
+        <result column="IS_FOREVER" property="isForever" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_ASSAIATION_ID, C_APPLY_TIME, C_APPROVE_TIME, N_STATE, C_CRETOR_ID, C_RESOURCE_ID, IS_FOREVER
+    </sql>
+
+</mapper>

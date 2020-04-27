@@ -1,4 +1,4 @@
-
+package java.com.example.mybatisplus;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
@@ -76,7 +76,8 @@ public class GenerateBak {
 		// 包配置
 		PackageConfig pc = new PackageConfig();
 		//pc.setModuleName(scanner("模块名"));
-		pc.setParent(null);
+		//pc.setParent(null);
+		pc.setParent("com.xdja.admin");
 		mpg.setPackageInfo(pc);
 
 		// 自定义配置

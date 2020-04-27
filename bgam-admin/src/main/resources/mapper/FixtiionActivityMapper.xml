@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.admin.mapper.FixtiionActivityMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.admin.entity.FixtiionActivity">
+        <result column="C_ID" property="id" />
+        <result column="C_NAME" property="name" />
+        <result column="C_ASSCAIATION_ID" property="asscaiationId" />
+        <result column="C_BELONG_DEPT_ID" property="belongDeptId" />
+        <result column="N_CREATE_TIMESTAMP" property="createTimestamp" />
+        <result column="N_UPDATE_TIMESTAMP" property="updateTimestamp" />
+        <result column="C_CREATER_ID" property="createrId" />
+        <result column="C_PHONE" property="phone" />
+        <result column="N_STATE" property="state" />
+        <result column="C_SOURCE_ID" property="sourceId" />
+        <result column="N_START_TIMESTAMP" property="startTimestamp" />
+        <result column="N_END_TIMESTAMP" property="endTimestamp" />
+        <result column="NEED_ORDER" property="needOrder" />
+        <result column="N_CAPACITY" property="capacity" />
+        <result column="N_REMAIN_CAPACITY" property="remainCapacity" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_NAME, C_ASSCAIATION_ID, C_BELONG_DEPT_ID, N_CREATE_TIMESTAMP, N_UPDATE_TIMESTAMP, C_CREATER_ID, C_PHONE, N_STATE, C_SOURCE_ID, N_START_TIMESTAMP, N_END_TIMESTAMP, NEED_ORDER, N_CAPACITY, N_REMAIN_CAPACITY
+    </sql>
+
+</mapper>

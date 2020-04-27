@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.base.mapper.DepartmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.base.entity.Department">
+        <result column="C_ID" property="id" />
+        <result column="C_NAME" property="name" />
+        <result column="C_PARENT_ID" property="parentId" />
+        <result column="C_GRADE" property="grade" />
+        <result column="C_TREE_ID" property="treeId" />
+        <result column="C_TREE_CODE" property="treeCode" />
+        <result column="N_UPDATE_TIMESTAMP" property="updateTimestamp" />
+        <result column="C_STATE" property="state" />
+        <result column="N_ORDER_NUM" property="orderNum" />
+        <result column="C_CODE" property="code" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_NAME, C_PARENT_ID, C_GRADE, C_TREE_ID, C_TREE_CODE, N_UPDATE_TIMESTAMP, C_STATE, N_ORDER_NUM, C_CODE
+    </sql>
+
+</mapper>

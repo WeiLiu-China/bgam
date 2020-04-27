@@ -1,11 +1,6 @@
 package com.xdja.web.controller;
 
-import com.xdja.common.constants.JsonResponse;
-import com.xdja.web.configure.token.TokenFactory;
-import com.xdja.framework.commons.utils.UUIDUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +25,8 @@ public class LoginController {
      * @return token
      */
     //@PostMapping(value = "/login")
-    //public JsonResponse login(){
+    //public Result login(){
     //    String token = tokenFactory.getOperator().add(UUIDUtil.random());
-    //    return JsonResponse.success(token);
+    //    return Result.success(token);
     //}
 }

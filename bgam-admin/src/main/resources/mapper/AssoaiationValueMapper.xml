@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.admin.mapper.AssoaiationValueMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.admin.entity.AssoaiationValue">
+        <result column="C_ID" property="id" />
+        <result column="C_TYPE" property="type" />
+        <result column="N_CREATE_TIMESTAMP" property="createTimestamp" />
+        <result column="N_UPDATE_TIMESTAMP" property="updateTimestamp" />
+        <result column="C_CREATER_ID" property="createrId" />
+        <result column="N_STATE" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_TYPE, N_CREATE_TIMESTAMP, N_UPDATE_TIMESTAMP, C_CREATER_ID, N_STATE
+    </sql>
+
+</mapper>

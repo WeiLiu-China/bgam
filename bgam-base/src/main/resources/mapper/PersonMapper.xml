@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.base.mapper.PersonMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.base.entity.Person">
+        <result column="C_ID" property="id" />
+        <result column="C_NAME" property="name" />
+        <result column="C_CODE" property="code" />
+        <result column="C_IDENTIFIER" property="identifier" />
+        <result column="N_UPDATE_TIMESTAMP" property="updateTimestamp" />
+        <result column="C_STATE" property="state" />
+        <result column="C_MOBILE" property="mobile" />
+        <result column="C_OFFICE_PHONE" property="officePhone" />
+        <result column="N_ORDER_NUM" property="orderNum" />
+        <result column="C_PASSWORD" property="password" />
+        <result column="C_POSITION" property="position" />
+        <result column="C_SEX" property="sex" />
+        <result column="C_JOB" property="job" />
+        <result column="C_COLLEAGE_ID" property="colleageId" />
+        <result column="C_NOTE" property="note" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_NAME, C_CODE, C_IDENTIFIER, N_UPDATE_TIMESTAMP, C_STATE, C_MOBILE, C_OFFICE_PHONE, N_ORDER_NUM, C_PASSWORD, C_POSITION, C_SEX, C_JOB, C_COLLEAGE_ID, C_NOTE
+    </sql>
+
+</mapper>

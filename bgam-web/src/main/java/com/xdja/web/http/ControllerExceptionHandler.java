@@ -1,6 +1,6 @@
 package com.xdja.web.http;
 
-import com.xdja.common.constants.JsonResponse;
+import com.xdja.common.constants.Result;
 import com.xdja.common.exception.ErrorTipException;
 import com.xdja.common.exception.NotFindLoginPersonException;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +29,8 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(ErrorTipException.class)
     @ResponseBody
-    public JsonResponse handlerException(ErrorTipException exception) {
-        return JsonResponse.failure(exception.getMessage());
+    public Result handlerException(ErrorTipException exception) {
+        return Result.failure(exception.getMessage());
     }
 
     /**
@@ -41,8 +41,8 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(NotFindLoginPersonException.class)
     @ResponseBody
-    public JsonResponse handlerException(NotFindLoginPersonException exception) {
-        return JsonResponse.failure(exception.getMessage());
+    public Result handlerException(NotFindLoginPersonException exception) {
+        return Result.failure(exception.getMessage());
     }
 
     /**
@@ -52,8 +52,8 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
-    public JsonResponse handlerException(HttpMessageNotReadableException exception) {
-        return JsonResponse.failure("缺少必要body参数");
+    public Result handlerException(HttpMessageNotReadableException exception) {
+        return Result.failure("缺少必要body参数");
     }
 
     /**
@@ -63,8 +63,8 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody
-    public JsonResponse handlerException(IllegalArgumentException exception) {
-        return JsonResponse.failure("参数不合法：" + exception.getMessage());
+    public Result handlerException(IllegalArgumentException exception) {
+        return Result.failure("参数不合法：" + exception.getMessage());
     }
 
     /**
@@ -74,8 +74,8 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseBody
-    public JsonResponse handlerException(MissingServletRequestParameterException exception) {
-        return JsonResponse.failure("缺少必要参数：" + exception.getMessage());
+    public Result handlerException(MissingServletRequestParameterException exception) {
+        return Result.failure("缺少必要参数：" + exception.getMessage());
     }
 
     /**
@@ -85,8 +85,8 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseBody
-    public JsonResponse handlerException(HttpRequestMethodNotSupportedException exception) {
-        return JsonResponse.failure("请求方法不支持：" + exception.getMessage());
+    public Result handlerException(HttpRequestMethodNotSupportedException exception) {
+        return Result.failure("请求方法不支持：" + exception.getMessage());
     }
 
     /**
@@ -96,8 +96,8 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler({Exception.class})
     @ResponseBody
-    public JsonResponse handlerException(Exception exception) {
+    public Result handlerException(Exception exception) {
         log.error(exception.getMessage(), exception);
-        return JsonResponse.failure("系统异常:" + exception.getMessage());
+        return Result.failure("系统异常:" + exception.getMessage());
     }
 }

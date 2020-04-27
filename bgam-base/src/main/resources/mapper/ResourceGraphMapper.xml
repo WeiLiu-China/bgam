@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.base.mapper.ResourceGraphMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.base.entity.ResourceGraph">
+        <result column="C_ID" property="id" />
+        <result column="C_NAME" property="name" />
+        <result column="N_UPDATE_TIMESTAMP" property="updateTimestamp" />
+        <result column="C_STATE" property="state" />
+        <result column="C_GRAPH" property="graph" />
+        <result column="C_LNG_LAT" property="lngLat" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_NAME, N_UPDATE_TIMESTAMP, C_STATE, C_GRAPH, C_LNG_LAT
+    </sql>
+
+</mapper>

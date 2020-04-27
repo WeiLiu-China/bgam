@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdja.admin.mapper.AssocaiationPropertyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdja.admin.entity.AssocaiationProperty">
+        <result column="C_ID" property="id" />
+        <result column="C_ASSOAICATION_ID" property="assoaicationId" />
+        <result column="C_ITEM" property="item" />
+        <result column="C_CREATER_ID" property="createrId" />
+        <result column="N_IS_SEARCH" property="isSearch" />
+        <result column="C_CODE" property="code" />
+        <result column="N_CANEDIT" property="canedit" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        C_ID, C_ASSOAICATION_ID, C_ITEM, C_CREATER_ID, N_IS_SEARCH, C_CODE, N_CANEDIT
+    </sql>
+
+</mapper>
